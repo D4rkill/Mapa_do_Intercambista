@@ -1,0 +1,62 @@
+<div *ngIf="!modoRecuperacao">
+  <header class="main-header cor-padrao">
+    <div class="header-top">
+      @if (!clienteLogado) {
+      <button class="login-btn" routerLink="tela-cadastro" routerLinkActive="active">
+        Cadastro <i class="bi bi-person-fill"></i>
+      </button>
+      <button class="login-btn" routerLink="tela-login" routerLinkActive="active">
+        Login <i class="bi bi-person-fill"></i>
+      </button>
+      }
+
+      @if (clienteLogado) {
+      <div class="usuario-dropdown">
+        <button class="usuario-logado" (click)="menuAberto = !menuAberto">
+          Olá, {{ nomeCliente }} <i class="bi bi-caret-down-fill"></i>
+        </button>
+        <ul class="dropdown-menu" [class.show]="menuAberto">
+          <li><button (click)="logout()">Logout</button></li>
+        </ul>
+      </div>
+      }
+    </div>
+
+    <div class="header-middle">
+      <a routerLink="home"><img class="logo" src="images/logo.png" alt="Logo Mapa do Intercambista"></a>
+    </div>
+
+    <div class="header-bottom">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a routerLink="foruns" routerLinkActive="active" class="nav-link">Fóruns</a></li>
+        <li class="nav-item"><a routerLink="destinos" routerLinkActive="active" class="nav-link">Destinos</a></li>
+        <li class="nav-item"><a routerLink="agencias" routerLinkActive="active" class="nav-link">Agências</a></li>
+        <li class="nav-item"><a routerLink="intercambista-grafico" routerLinkActive="active"
+            class="nav-link">Tendências</a></li>
+
+        <!-- transformamos a busca em um item do menu -->
+        <li class="nav-item nav-search-item" [class.expanded]="buscaAberta">
+          <button class="search-toggle" type="button" (click)="toggleBusca()" aria-label="Abrir busca">
+            <i class="bi bi-search"></i>
+          </button>
+
+          <!-- input aparece inline ao abrir (mantivemos *ngIf p/ acessibilidade e foco) -->
+          <input *ngIf="buscaAberta" class="search-input" type="text" placeholder="Buscar agências ou intercâmbios..."
+            [(ngModel)]="busca" (input)="filtrarResultados()" (blur)="fecharBusca()" autofocus />
+
+          <!-- resultados (dropdown alinhado ao item) -->
+          <ul class="search-results" *ngIf="buscaAberta && resultados.length > 0">
+            <li *ngFor="let item of resultados" (mousedown)="navegar(item)">
+              <span class="tipo" *ngIf="item.tipo === 'agencia'">🏢 Agência</span>
+              <span class="tipo" *ngIf="item.tipo === 'destino'">🌎 Intercâmbio</span>
+              <span class="titulo">{{ item.nome }}</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+
+
+  </header>
+</div>

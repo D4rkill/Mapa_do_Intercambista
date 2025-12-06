@@ -1,0 +1,289 @@
+.forum-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+h1 {
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+h1::after {
+  content: "";
+  width: 60px;
+  height: 4px;
+  background: #0066ff;
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  border-radius: 10px;
+}
+
+
+.ordenacao {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.criar-post,
+.post {
+  background: #fff;
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 18px;
+}
+
+.titulo-input,
+.edit-titulo {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #d0d0d0;
+  margin-bottom: 10px;
+}
+
+.texto-input,
+.edit-texto,
+textarea {
+  width: 100%;
+  padding: 10px;
+  min-height: 80px;
+  border-radius: 8px;
+  border: 1px solid #d0d0d0;
+  resize: vertical;
+  margin-bottom: 8px;
+}
+
+.btn-postar,
+.btn-comentar,
+.resposta-box button,
+.salvar-edicao {
+  background: #2f80ed;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-postar:hover,
+.btn-comentar:hover,
+.resposta-box button:hover {
+  background: #1c63c6;
+}
+
+.post-titulo {
+  margin: 0 0 6px 0;
+  font-size: 20px;
+}
+
+.autor {
+  color: #666;
+  font-size: 13px;
+  margin: 6px 0 10px 0;
+}
+
+.post-conteudo {
+  margin-bottom: 12px;
+}
+
+.acoes button,
+.acoes-comentario button {
+  margin-right: 8px;
+  background: #f0f0f0;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.acoes button:hover,
+.acoes-comentario button:hover {
+  background: #e6e6e6;
+}
+
+/* botão like ativo (verde claro) */
+.acoes button.ativo,
+.acoes-comentario button.ativo {
+  background: #d6f5d6;
+  font-weight: 700;
+}
+
+/* botão dislike ativo (vermelho claro) */
+.acoes button.ativo-dislike,
+.acoes-comentario button.ativo-dislike {
+  background: #ffd6d6;
+  font-weight: 700;
+}
+
+/* desabilitado visual */
+.acoes button[disabled],
+.acoes-comentario button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* edição */
+.editar-post {
+  padding: 14px;
+  background: #fafafa;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.acoes-edicao {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.cancelar-edicao {
+  background: #ccc;
+  color: #111;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* comentários */
+.comentarios {
+  margin-top: 14px;
+}
+
+.comentario {
+  background: #fbfbfb;
+  padding: 12px;
+  border-left: 4px solid #2f80ed;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.resposta {
+  margin-left: 22px;
+  margin-top: 10px;
+  padding: 10px;
+  background: #fff;
+  border-left: 3px solid #1976d2;
+  border-radius: 8px;
+}
+
+.input-comentario {
+  width: 100%;
+  min-height: 70px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #d0d0d0;
+  margin-top: 8px;
+  resize: vertical;
+}
+
+@media (max-width: 600px) {
+  .forum-container {
+    padding: 16px;
+  }
+
+  .titulo {
+    font-size: 22px;
+  }
+}
+
+/* Botões gerais */
+.btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: 0.2s ease-in-out;
+  margin-right: 6px;
+}
+
+/* Botão Salvar */
+.btn-salvar {
+  background: #4caf50;
+  color: white;
+}
+
+.btn-salvar:hover {
+  background: #43a047;
+}
+
+/* Botão Cancelar */
+.btn-cancelar {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.btn-cancelar:hover {
+  background: #d5d5d5;
+}
+
+/* Botão Editar */
+.btn-editar {
+  background: #2196f3;
+  color: white;
+}
+
+.btn-editar:hover {
+  background: #1976d2;
+}
+
+/* Botão Excluir */
+.btn-excluir {
+  background: #f44336;
+  color: white;
+}
+
+.btn-excluir:hover {
+  background: #d32f2f;
+}
+
+/* Botão Responder */
+.btn-responder {
+  background: #ffca28;
+  color: #000;
+}
+
+.btn-responder:hover {
+  background: #ffb300;
+}
+
+/* Like */
+.btn-like {
+  background: #e8f5e9;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-like:hover {
+  background: #d4edda;
+}
+
+/* Dislike */
+.btn-dislike {
+  background: #ffebee;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-dislike:hover {
+  background: #ffcdd2;
+}

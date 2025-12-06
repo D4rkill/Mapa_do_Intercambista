@@ -1,0 +1,154 @@
+<div class="forum-container">
+
+  <h1>Fórum — Mapa do Intercambista</h1>
+
+  <div class="ordenacao">
+    <label>Ordenar por:</label>
+    <select [(ngModel)]="ordenarPor">
+      <option value="recentes">Mais recentes</option>
+      <option value="likes">Mais curtidos</option>
+    </select>
+  </div>
+
+  <!-- Criar post -->
+  @if (usuarioLogado) {
+  <div class="card criar-post">
+    <input class="titulo-input" [(ngModel)]="novoTitulo" placeholder="Título do post..." />
+    <textarea class="texto-input" [(ngModel)]="novoConteudo" placeholder="Escreva seu post..."></textarea>
+    <button class="btn-postar" (click)="criarPost()">Postar</button>
+  </div>
+  }
+
+  <!-- Posts -->
+  @for (post of postsOrdenados; track post.id) {
+
+  <div class="card post">
+
+    @if (post.editando) {
+    <div>
+      <input class="edit-titulo" [(ngModel)]="post.titulo" />
+      <textarea class="edit-texto" [(ngModel)]="post.conteudo"></textarea>
+
+      <button class="salvar-edicao" (click)="salvarEdicaoPost(post, post.titulo, post.conteudo)">
+        Salvar
+      </button>
+
+      <button class="cancelar-edicao" (click)="post.editando = false">
+        Cancelar
+      </button>
+    </div>
+    } @else {
+    <h3 class="post-titulo">{{ post.titulo }}</h3>
+    <p class="autor">Postado por {{ post.autor }}</p>
+    <p class="post-conteudo">{{ post.conteudo }}</p>
+
+    <div class="acoes">
+
+      <!-- Like -->
+      <button class="acao-like" [class.ativo]="post.likedBy.includes(nomeUsuario)" [disabled]="!usuarioLogado"
+        (click)="likePost(post)">
+        👍 {{ post.likes }}
+      </button>
+
+      <!-- Dislike -->
+      <button class="acao-dislike" [class.ativo-dislike]="post.dislikedBy.includes(nomeUsuario)"
+        [disabled]="!usuarioLogado" (click)="dislikePost(post)">
+        👎 {{ post.dislikes }}
+      </button>
+
+      @if (post.autor === nomeUsuario) {
+      <button (click)="post.editando = true">Editar</button>
+      <button (click)="excluirPost(post.id)">Excluir</button>
+      }
+    </div>
+    }
+
+    <!-- Comentários -->
+    <div class="comentarios">
+      <h4>Comentários</h4>
+
+      @for (comentario of ordenarComentarios(post.comentarios); track comentario.id) {
+
+      <div class="comentario">
+
+        @if (comentario.editando) {
+
+        <div>
+          <textarea [(ngModel)]="comentario.texto"></textarea>
+          <button class="salvar-edicao" (click)="salvarEdicaoComentario(comentario, comentario.texto)">Salvar</button>
+          <button class="cancelar-edicao" (click)="comentario.editando = false">Cancelar</button>
+        </div>
+
+        } @else {
+
+        <p class="autor">{{ comentario.autor }}</p>
+        <p>{{ comentario.texto }}</p>
+
+        <div class="acoes-comentario">
+
+          <!-- Like -->
+          <button [class.ativo]="comentario.likedBy.includes(nomeUsuario)" [disabled]="!usuarioLogado"
+            (click)="likeComentario(comentario)">👍 {{ comentario.likes }}</button>
+
+          <!-- Dislike -->
+          <button [class.ativo-dislike]="comentario.dislikedBy.includes(nomeUsuario)" [disabled]="!usuarioLogado"
+            (click)="dislikeComentario(comentario)">👎 {{ comentario.dislikes }}</button>
+
+          @if (comentario.autor === nomeUsuario) {
+          <button (click)="comentario.editando = true">Editar</button>
+          <button (click)="excluirComentario(post, comentario)">Excluir</button>
+          }
+
+          @if (usuarioLogado) {
+          <button (click)="comentario.responder = !comentario.responder">Responder</button>
+          }
+
+        </div>
+
+        }
+
+        <!-- Caixa de resposta -->
+        @if (comentario.responder && usuarioLogado) {
+        <div class="resposta-box">
+          <textarea [(ngModel)]="comentario.novaResposta" placeholder="Responder..."></textarea>
+          <button (click)="responderComentario(comentario)">Enviar</button>
+        </div>
+        }
+
+        <!-- Respostas -->
+        @for (r of ordenarComentarios(comentario.respostas); track r.id) {
+
+        <div class="resposta">
+          <p class="autor">{{ r.autor }}</p>
+          <p>{{ r.texto }}</p>
+
+          <div class="acoes-comentario">
+            <button [class.ativo]="r.likedBy.includes(nomeUsuario)" [disabled]="!usuarioLogado"
+              (click)="likeComentario(r)">👍 {{ r.likes }}</button>
+
+            <button [class.ativo-dislike]="r.dislikedBy.includes(nomeUsuario)" [disabled]="!usuarioLogado"
+              (click)="dislikeComentario(r)">👎 {{ r.dislikes }}</button>
+          </div>
+        </div>
+
+        }
+
+      </div>
+
+      }
+
+      <!-- Criar comentário -->
+      @if (usuarioLogado) {
+      <textarea class="input-comentario" [(ngModel)]="inputsComentario[post.id]"
+        placeholder="Escreva um comentário..."></textarea>
+
+      <button class="btn-comentar" (click)="comentar(post)">Comentar</button>
+      }
+
+    </div>
+
+  </div>
+
+  }
+
+</div>

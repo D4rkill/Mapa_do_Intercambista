@@ -1,0 +1,36 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { MenuSuperior } from './menu-superior/menu-superior';
+import { Agencias } from './agencias/agencias';
+import { Destinos } from './destinos/destinos';
+import { Foruns } from './foruns/foruns';
+import { TelaCadastro } from './tela-cadastro/tela-cadastro';
+import { TelaLogin } from './tela-login/tela-login';
+import { PacoteDetalhe } from './pacote-detalhe/pacote-detalhe';
+import { Home } from './home/home';
+import { AgenciaDetalhes } from './agencia-detalhes/agencia-detalhes';
+import { TelaEsqueciSenha } from './tela-esqueci-senha/tela-esqueci-senha';
+import { TelaResetarSenha } from './tela-resetar-senha/tela-resetar-senha';
+import { IntercambistaGrafico } from './intercambista-grafico/intercambista-grafico';
+
+const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: Home },
+  { path: 'menu-superior', component: MenuSuperior },
+  { path: 'agencias', component: Agencias },
+  { path: 'agencia-detalhes/:id', component: AgenciaDetalhes},
+  { path: 'destinos', component: Destinos },
+  { path: 'foruns', component: Foruns },
+  { path: 'pacotes/:pais', component: PacoteDetalhe },
+  { path: 'tela-login', component: TelaLogin },
+  { path: 'tela-cadastro', component: TelaCadastro },
+  { path: 'tela-esqueci-senha', component: TelaEsqueciSenha},
+  { path: 'tela-resetar-senha', component: TelaResetarSenha},
+  { path: 'intercambista-grafico', component: IntercambistaGrafico}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
