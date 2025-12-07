@@ -86,9 +86,6 @@ O Supabase fornece autenticação integrada, endpoints REST e comunicação segu
 
 ### **3. Banco de Dados (PostgreSQL – Supabase)**  
 O banco armazena informações como:
-- Destinos  
-- Pacotes  
-- Agências  
 - Usuários cadastrados  
 
 A integração permite consultas rápidas e estruturadas, mantendo a consistência dos dados.
